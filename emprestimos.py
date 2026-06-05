@@ -19,7 +19,7 @@ def emprestimo_ativo(livro_id): # Essa função verifica se um livro específico
     return None
 
 def calcular_multa(data_prevista_str): # Essa função calcula a multa com base na data prevista de devolução e a data atual.
-    data_prevista = datetime.datetime.striptime(data_prevista_str, "%Y-%m-%d").date()
+    data_prevista = datetime.datetime.strptime(data_prevista_str, "%Y-%m-%d").date()
     hoje = datetime.date.today()
     atraso = (hoje - data_prevista).days
     if atraso <=0: 
@@ -98,7 +98,7 @@ def devolver_livro(): # Essa função é responsável por processar a devoluçã
         print("ID inválido.")
         return
 
-    emprestimo = buscar_emprestimo_ativo(int(lid))
+    emprestimo = emprestimo_ativo(int(lid))
     if not emprestimo:
         print("Nenhum empréstimo ativo encontrado para esse livro.")
         return
